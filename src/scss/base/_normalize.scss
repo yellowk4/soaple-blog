@@ -1,0 +1,69 @@
+﻿/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+html{-ms-text-size-adjust:100%; -webkit-text-size-adjust:100%;}
+body{margin:0;}
+audio, canvas, progress, video {display:inline-block; vertical-align:baseline;}
+audio:not([controls]) {display:none; height:0;}
+legend,caption,[hidden],template {display:none;}
+a {text-decoration:none; background:transparent;cursor: pointer; -webkit-tap-highlight-color: rgba(0, 0, 0, .1)} /* 탭 하이라이트 추가 */
+abbr[title] {border-bottom:1px dotted;}
+h1,h2,h3, b, strong {font-weight:700;}
+strong{font-weight: 700;}
+dfn {font-style:italic;}
+h1,h2,h3,h4,h5,h6 {margin:0;}
+sub, sup {line-height:0; position:relative; vertical-align:baseline;}
+sup {top:-0.5em;}
+sub {bottom:-0.25em;}
+img {border:0;vertical-align:top;}
+svg:not(:root) {overflow:hidden;}
+figure {margin:1em 40px;}
+hr {-moz-box-sizing:content-box; box-sizing:content-box; height:0;}
+pre {margin:0;word-break:break-all;white-space: pre-wrap;}
+code, kbd, pre, samp {font-family:monospace, monospace; font-size:10px; font-size:1rem;}
+button, input, optgroup, select, textarea {color:inherit; font:inherit; margin:0; padding:0; border-radius:0;}
+button:focus, input:focus, textarea:focus, select:focus{outline:0;}
+button{overflow:visible;border:none;background:none; -webkit-tap-highlight-color: rgba(0, 0, 0, .1)} /* 탭 하이라이트 추가 */
+button, select {text-transform:none;}
+button, html input[type="button"], input[type="reset"], input[type="submit"] {appearance:button; cursor:pointer;}
+button[disabled], html input[disabled] {cursor:default;}
+button::-moz-focus-inner, input::-moz-focus-inner {border:0; padding:0;}
+select,input,button:focus{outline:0;}
+input {line-height:normal;}
+input[type="checkbox"], input[type="radio"] {box-sizing:border-box; padding:0;}
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {height:auto;}
+input[type="search"] {appearance:none; -moz-box-sizing:content-box; -webkit-box-sizing:content-box; box-sizing:content-box;}
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {appearance:none;}
+input[placeholder],[placeholder],*[placeholder]{color:#777;}
+fieldset{border:0;padding:0;margin:0;}
+legend {border:0; padding:0;}
+textarea {overflow:auto;resize:none;appearance:none;}
+optgroup {font-weight:bold;}
+table {border-collapse:collapse; border-spacing:0;}
+td, th {padding:0;}
+ul,ol {list-style:none; margin:0; padding:0;}
+dl,dt,dd,p {margin:0; padding:0;}
+address{font-style:normal;}
+em{font-style:normal;}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{appearance: none;}
+input[type=number]{appearance:textfield;}
+
+/* font&color */
+html{height:100%;
+	font-size:62.5%;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+}
+body,textarea,input,select,pre{color:#333;font-family:'AppleSDGothicNeo-light',sans-serif;line-height:1;font-size:13px;font-size:1.4rem;}
+body.desktop,
+body.desktop textarea,
+body.desktop input,
+body.desktop select,
+body.desktop pre{font-family:'AppleSDGothicNeo-light',sans-serif;}
+a{color:inherit;}
+::-moz-selection{background-color:#fbb900;color:#fff;}
+::selection{background-color: #fbb900;color: #fff;}
+
+.wrap.fixed { position: fixed; left: 0; right: 0; top: 0; }
+.swiper-content:after { content: ""; clear: both; display: block; }

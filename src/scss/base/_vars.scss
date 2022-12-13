@@ -1,0 +1,580 @@
+// vars 
+@use 'sass:math';
+
+$primaryColor : #e0164d !default;
+$masterColor : #000 !default;
+$secondColor : white;
+
+$black: #000 !default;
+$white: #fff !default;
+
+$defaultContainerSize: 990px !default;
+$defaultContainerSize2: 1130px !default;
+
+$imgCommonUrl: 'https://img.hunet.co.kr/edu/common';
+$imgUrl: 'https://hunetdown.cdn.hunet.co.kr/Resources/HunetDev/HRD_DEV/Images/edu/customize';
+$imgEduUrl: 'https://hunetdown.cdn.hunet.co.kr/Resources/HunetDev/HRD_DEV/Images/edu';
+
+// mixin 
+@mixin color-opacity($color, $opacity: 0.3) {
+	color: rgba($color, $opacity);
+}
+
+@mixin bcolor-opacity($color, $opacity: 0.3) {
+	border-color: rgba($color, $opacity);
+}
+
+@mixin background-opacity($color, $opacity: 0.3) {
+	background: $color;
+	/* The Fallback */
+	background: rgba($color, $opacity);
+}
+
+@mixin zoom($scale: 1.2, $time: .3s) {
+	overflow: hidden;
+
+	img {
+		transform: scale(1);
+		transition: $time;
+	}
+
+	&:hover {
+		img {
+			transform: scale($scale);
+		}
+	}
+}
+
+@mixin flex($horizontal: center, $vertical: center) {
+	display: flex;
+	justify-content: $horizontal;
+	align-items: $vertical;
+}
+
+@mixin vc-inline {
+	content: '';
+	display: inline-block;
+	vertical-align: middle;
+}
+
+@mixin vc-position {
+	content: '';
+	display: block;
+	position: absolute;
+}
+
+@mixin font-size($num: 12) {
+	font-size: $num+px !important;
+}
+
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+}
+
+@mixin ellipsis($line: 1) {
+	@if ($line==1) {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	@else {
+		display: -webkit-box;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: $line;
+	}
+}
+
+@mixin background($url, $x, $y, $width, $height) {
+	background-image: url($url);
+	background-position: ($x) ($y);
+	background-size: $width $height;
+}
+
+$devices: (mobile: 320px,
+	tablet: 768px,
+	desktop: 1280px);
+
+@mixin mq($device) {
+	@if map-has-key($devices, $device) {
+		$device-width: map-get($devices, $device);
+
+		@media screen and (min-width: #{$device-width}) {
+			@content;
+		}
+	}
+
+	@else {
+		@warn 'Invalid breakpoint: #{$device}.';
+	}
+}
+
+@mixin inline-block-box($vertical-align: top) {
+	display: inline-block;
+	vertical-align: $vertical-align;
+}
+
+@mixin border-box($width, $height, $padding: 20px 20px 0) {
+	position: relative;
+	float: left;
+	width: $width;
+	height: $height;
+	border: 1px solid #ddd;
+	box-sizing: border-box;
+
+	.inner {
+		padding: $padding
+	}
+}
+
+@mixin arrBtn($width, $height, $color, $bWidth) {
+	width: $width;
+	height: $height;
+	border-style: solid;
+	border-color: $color;
+	border-width: $bWidth;
+	border-left-width: 0;
+	border-bottom-width: 0;
+	display: inline-block;
+}
+
+@mixin btnInterest ($width, $height, $bWidth, $radius, $bgcolor, $color, ) {
+	width: $width;
+	height: $height;
+	color: $color;
+	border-width: $bWidth;
+	border-radius: $radius;
+	background: $bgcolor url(https://hunetdown.cdn.hunet.co.kr/Resources/HunetDev/HRD_DEV/Images/edu/common/icon-interest.png) no-repeat;
+	margin: 0;
+}
+
+@mixin position($p: absolute, $t: null, $b: null, $l: null, $r: null) {
+	position: $p;
+	top: $t;
+	bottom: $b;
+	left: $l;
+	right: $r;
+}
+
+@mixin circle-bullet($width, $height, $bgColor, $radius) {
+	width: $width;
+	height: $height;
+	background-color: $bgColor;
+	border-radius: $radius;
+	vertical-align: middle;
+}
+
+@mixin box-sizing($box-model) {
+	-webkit-box-sizing: $box-model;
+	-moz-box-sizing: $box-model;
+	-ms-box-sizing: $box-model;
+	box-sizing: $box-model;
+}
+
+@mixin tabSize {
+
+	&:first-child:nth-last-child(2),
+	&:first-child:nth-last-child(2)~li {
+		width: 50%;
+	}
+
+	&:first-child:nth-last-child(3),
+	&:first-child:nth-last-child(3)~li {
+		width: 33.33%;
+	}
+
+	&:first-child:nth-last-child(4),
+	&:first-child:nth-last-child(4)~li {
+		width: 25%;
+	}
+
+	&:first-child:nth-last-child(5),
+	&:first-child:nth-last-child(5)~li {
+		width: 20%;
+	}
+
+	&:first-child:nth-last-child(6),
+	&:first-child:nth-last-child(6)~li {
+		width: 16.66%;
+	}
+
+	&:first-child:nth-last-child(7),
+	&:first-child:nth-last-child(7)~li {
+		width: 14.28%;
+	}
+
+	&:first-child:nth-last-child(8),
+	&:first-child:nth-last-child(8)~li {
+		width: 12.5%;
+	}
+
+	&:first-child:nth-last-child(9),
+	&:first-child:nth-last-child(9)~li {
+		width: 11.11%;
+	}
+
+	&:first-child:nth-last-child(10),
+	&:first-child:nth-last-child(10)~li {
+		width: 10%;
+	}
+}
+
+$tab-li : (2 : 50%,
+	3 : 33.33%,
+	4 : 25%,
+	5 : 20%,
+	6 : 16.66%,
+	7 : 14.28%,
+	8 : 12.5%,
+	9 : 11.11%,
+	10 : 10%,
+);
+
+@mixin selBox {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+@mixin iconCancel($size: 21px, $thick: 2px, $color: #000, $padding: 0, $display: inline-block, $position: relative) {
+	position: $position;
+	display: $display;
+	width: $size + $padding*2;
+	height: $size + $padding*2;
+
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: round($size*$sqrt_2 - $thick);
+		height: $thick;
+		background-color: $color;
+	}
+
+	&:before {
+		-webkit-transform: translate(-50%, -50%) rotate(45deg);
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+
+	&:after {
+		-webkit-transform: translate(-50%, -50%) rotate(135deg);
+		transform: translate(-50%, -50%) rotate(135deg);
+	}
+}
+
+@mixin iconPlus($size: 21px, $thick: 2px, $color: #000, $padding: 0, $display: inline-block, $position: relative) {
+	position: $position;
+	display: $display;
+	width: $size + $padding*2;
+	height: $size + $padding*2;
+
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: round($size*$sqrt_2 - $thick);
+		height: $thick;
+		background-color: $color;
+	}
+
+	&:before {
+		-webkit-transform: translate(-50%, -50%) rotate(0deg);
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+
+	&:after {
+		-webkit-transform: translate(-50%, -50%) rotate(90deg);
+		transform: translate(-50%, -50%) rotate(90deg);
+	}
+}
+
+@mixin iconTriangle($direction: 'up', $width: 20px, $height: 10px, $color: #000, $display: inline-block) {
+	display: $display;
+	width: $width;
+	height: $height;
+
+	&:before {
+		content: '';
+		display: block;
+
+		@if ($direction=='up') {
+			border-bottom: $height solid $color;
+			border-left: round($width*0.5) solid transparent;
+			border-right: round($width*0.5) solid transparent;
+		}
+
+		@else if ($direction=='down') {
+			border-top: $height solid $color;
+			border-left: round($width*0.5) solid transparent;
+			border-right: round($width*0.5) solid transparent;
+		}
+
+		@else if ($direction=='left') {
+			border-top: round($height*0.5) solid transparent;
+			border-bottom: round($height*0.5) solid transparent;
+			border-right: $width solid $color;
+		}
+
+		@else if ($direction=='right') {
+			border-top: round($height*0.5) solid transparent;
+			border-bottom: round($height*0.5) solid transparent;
+			border-left: $width solid $color;
+		}
+	}
+}
+
+@mixin iconMenu($width: 21px, $thick: 2px, $interval: 6px, $color: #000, $padding: 0) {
+	position: relative;
+	display: block;
+	margin: $thick+$interval+$padding $padding;
+
+	&,
+	&:before,
+	&:after {
+		width: $width;
+		height: $thick;
+		background-color: $color;
+	}
+
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		left: 0;
+	}
+
+	&:before {
+		top: -($thick+$interval);
+	}
+
+	&:after {
+		top: $thick+$interval;
+	}
+}
+
+@mixin iconMore($direction: 'vertical', $size: 4px, $interval: 4px, $color: #000, $padding: 0) {
+	position: relative;
+	display: block;
+	margin: $size+$interval+$padding;
+
+	&,
+	&:before,
+	&:after {
+		width: $size;
+		height: $size;
+		border-radius: 50%;
+		background-color: $color;
+	}
+
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+	}
+
+	@if ($direction=='vertical') {
+		&:before {
+			top: -($size+$interval);
+			left: 0;
+		}
+
+		&:after {
+			top: $size+$interval;
+			left: 0;
+		}
+	}
+
+	@else if ($direction=='horizontal') {
+		&:before {
+			top: 0;
+			left: -($size+$interval);
+		}
+
+		&:after {
+			top: 0;
+			left: $size+$interval;
+		}
+	}
+}
+
+@mixin iconTriangleType02 ($tWidth1, $tWidth2, $tWidth3, $tColor) {
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-left-width: 0;
+	border-left-color: transparent;
+	border-top-width: $tWidth1; //ex 15px
+	border-top-color: transparent;
+	border-bottom-width: $tWidth2; //ex 15px
+	border-bottom-color: transparent;
+	border-right-width: $tWidth3; //ex 30px
+	border-right-color: $tColor;
+}
+
+//svg bg color
+@mixin bg-svg($url, $value, $color:#fff) {
+	-webkit-mask: url($imgUrl+$url+#{$value}+'.svg') no-repeat 50% 50%;
+	mask: url($imgUrl+$url+#{$value}+'.svg') no-repeat 50% 50%;
+	-webkit-mask-size: cover;
+	mask-size: cover;
+	background-color: $color;
+}
+
+//svg bg sprite color
+@mixin bg-sp-svg($url, $value, $color:#fff) {
+	-webkit-mask: url($imgUrl+$url+'sprite.svg#'+#{$value}) no-repeat 50% 50%;
+	mask: url($imgUrl+$url+'sprite.svg#'+#{$value}) no-repeat 50% 50%;
+	-webkit-mask-size: cover;
+	mask-size: cover;
+	background-color: $color;
+}
+
+//svg bg sprite normal
+@mixin bg-sp-svg-normal($url, $value) {
+	background: url($imgUrl+$url+'sprite.svg#'+#{$value}) no-repeat 50% 50%;
+}
+
+@mixin mainNavHoverIconTurn ($transitionT, $translateY) {
+	transition: ease-out $transitionT;
+	transform: rotate(1turn) translateY($translateY);
+}
+
+@mixin mainNavHoverIconTop ($transitionT, $translateY) {
+	transition: ease-out $transitionT;
+	transform: translateY($translateY);
+}
+
+@mixin mainNavHoverText ($transitionT, $translateY) {
+	transition: ease-in-out $transitionT;
+	transform: translateY($translateY);
+}
+
+@mixin fontStyle ($fontSize, $fontWeight, $fontColor) {
+	font-size: $fontSize;
+	font-weight: $fontWeight;
+	color: $fontColor;
+}
+
+@mixin totalColor ($name, $state) {
+	@if ($name==font) {
+		@if ($state==master) {
+			color: $masterColor !important;
+		}
+
+		@else {
+			color: $primaryColor !important;
+		}
+	}
+
+	@if ($name==bg) {
+		@if ($state==master) {
+			background-color: $masterColor !important;
+		}
+
+		@else {
+			background-color: $primaryColor !important;
+		}
+	}
+
+	@if ($name==border) {
+		@if ($state==master) {
+			border-color: $masterColor !important;
+		}
+
+		@else {
+			border-color: $primaryColor !important;
+		}
+	}
+}
+
+//가상클래스
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+	content: $content;
+	display: $display;
+	position: $pos;
+}
+
+// 사용법
+// div::after {
+// 	@include pseudo;
+// 	top: -1rem; left: -1rem;
+// 	width: 1rem; height: 1rem;
+// }
+
+//반응형 레티오
+@mixin responsive-ratio($x, $y, $pseudo: false) {
+	$padding: unquote(($y / $x) * 100 + '%');
+
+	@if $pseudo {
+		&:before {
+			@include pseudo($pos: relative);
+			width: 100%;
+			padding-top: $padding;
+		}
+	}
+
+	@else {
+		padding-top: $padding;
+	}
+}
+
+// 사용법
+// div {
+// 	@include responsive-ratio(16,9);
+// }
+
+//z-index
+@function z($name) {
+	@if index($z-indexes, $name) {
+		@return (length($z-indexes) - index($z-indexes, $name))+1;
+	}
+
+	@else {
+		@warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+		@return null;
+	}
+}
+
+//사용법
+// $z-indexes: (
+// 	"outdated-browser",
+// 	"modal",
+// 	"site-header",
+// 	"page-wrapper",
+// 	"site-footer"
+// );
+
+// .site-header {
+// 	z-index: z('modal');
+// }
+
+
+//IR기법
+@mixin ir_pm($apply: pc) {
+	// PC용
+	@if ($apply == pc) {
+		display:block;
+		overflow:hidden;
+		font-size:1px;
+		line-height:0;
+		text-indent:-9999px;
+	}
+	// Mobile용
+	@else {
+		display:block;
+		overflow:hidden;
+		font-size:1px;
+		line-height:0;
+		color:transparent; 
+	}
+}
