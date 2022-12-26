@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/soaple-blog/static/css/main.2e5d4e69.css",
+    "main.js": "/soaple-blog/static/js/main.a3729ccb.js",
+    "index.html": "/soaple-blog/index.html",
+    "main.2e5d4e69.css.map": "/soaple-blog/static/css/main.2e5d4e69.css.map",
+    "main.a3729ccb.js.map": "/soaple-blog/static/js/main.a3729ccb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2e5d4e69.css",
+    "static/js/main.a3729ccb.js"
+  ]
+}
